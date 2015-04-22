@@ -6,9 +6,14 @@ public class Player : MonoBehaviour {
 	public bool grounded = false;
 	public float jumpSpeed = 10.0F;
 	public Transform attackZone;
+	public Transform weapon;
+	public float rayDistance;
 	private Rigidbody rb;
+	private Animation anim;
+	public bool isLeft = false;
 	void Start () {
 		rb = GetComponent<Rigidbody>();
+		anim = GetComponentInChildren<Animation>();
 	}
 	void Update() {
 		float _speed = speed;
@@ -22,12 +27,26 @@ public class Player : MonoBehaviour {
 		transform.Translate(hor, 0, vert);
 		rb.AddForce(Vector3.down * 12.0f);
 
-		float testVal = 1.0f;
-		if (Input.GetAxis("Horizontal") < 0.0f) {
-			testVal *= -1;
+		Vector3 mouseLoc = CastRayToWorld();
+		if (mouseLoc.x < transform.position.x) {
+			isLeft = true;
+		} else {
+			isLeft = false;
 		}
 
-		attackZone.localPosition = new Vector3((0.676f * testVal), 0.0f, 0.0f);
+		if (isLeft) {
+			attackZone.localPosition = new Vector3(-0.676f, 0.0f, 0.0f);
+			weapon.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+		} else {
+			attackZone.localPosition = new Vector3(0.676f, 0.0f, 0.0f);
+			weapon.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+		}
+
+
+		if (Input.GetMouseButtonDown(0)) {
+			anim.Play();
+		}
+
 
 		if(Input.GetKeyDown(KeyCode.Space) && grounded) {
 			rb.AddForce(Vector3.up *jumpSpeed);
@@ -42,5 +61,12 @@ public class Player : MonoBehaviour {
 		if (other.collider.tag == "Ground") {
 			grounded = false;
 		}
+	}
+
+	Vector3 CastRayToWorld() {
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Vector3 point = ray.origin + (ray.direction * rayDistance);
+		//Debug.Log(point);
+		return point;
 	}
 }
