@@ -7,6 +7,8 @@ Project("{97BA5EBE-A1CE-BFF0-7B99-2FED2F06907E}") = "PunkRock_Repository", "Asse
 EndProject
 Project("{97BA5EBE-A1CE-BFF0-7B99-2FED2F06907E}") = "PunkRock_Repository", "Assembly-CSharp-Editor.csproj", "{563B0B57-A34B-B63E-605F-87B15148B120}"
 EndProject
+Project("{97BA5EBE-A1CE-BFF0-7B99-2FED2F06907E}") = "PunkRock_Repository", "Assembly-UnityScript-firstpass.unityproj", "{7140AF32-ADD0-24D3-558E-40384C260DAB}"
+EndProject
 Project("{97BA5EBE-A1CE-BFF0-7B99-2FED2F06907E}") = "PunkRock_Repository", "Assembly-UnityScript.unityproj", "{463AE062-089F-9613-7263-6E77F0C9C160}"
 EndProject
 Global
@@ -27,6 +29,10 @@ Global
 		{563B0B57-A34B-B63E-605F-87B15148B120}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{563B0B57-A34B-B63E-605F-87B15148B120}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{563B0B57-A34B-B63E-605F-87B15148B120}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7140AF32-ADD0-24D3-558E-40384C260DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7140AF32-ADD0-24D3-558E-40384C260DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7140AF32-ADD0-24D3-558E-40384C260DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7140AF32-ADD0-24D3-558E-40384C260DAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{463AE062-089F-9613-7263-6E77F0C9C160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{463AE062-089F-9613-7263-6E77F0C9C160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{463AE062-089F-9613-7263-6E77F0C9C160}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,7 +41,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-				GlobalSection(MonoDevelopProperties) = preSolution
+																			GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
