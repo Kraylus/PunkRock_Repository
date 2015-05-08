@@ -89,7 +89,8 @@
 	     else if (distance<=stop) {
 	     	if (!CR_Running) {
 	     		spriteRend.sprite = spriteArray[1];
-	     		StartCoroutine(AttackCD(0.25f, Random.value));
+	     		gameObject.BroadcastMessage("Punch");
+	     		StartCoroutine(ReturnToIdle(0.5f, Random.value));
 	     	}
 	//     myTransform.rotation = Quaternion.Slerp(myTransform.rotation,
 	//     Quaternion.LookRotation(target.position - myTransform.position), rotationSpeed*Time.deltaTime);
@@ -100,10 +101,10 @@
  	
  }
  
- function AttackCD (spriteReset : float, waitTime : float) {
+ function ReturnToIdle (spriteReset : float, waitTime : float) {
 		// suspend execution for waitTime seconds
 		CR_Running = true;
-		gameObject.BroadcastMessage("Punch");
+
 		yield WaitForSeconds (spriteReset);
 		spriteRend.sprite = spriteArray[0];
 		yield WaitForSeconds (waitTime);

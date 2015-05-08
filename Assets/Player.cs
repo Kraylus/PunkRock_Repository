@@ -20,7 +20,6 @@ public class Player : MonoBehaviour {
 	public Sprite[] spriteArray;
 
 	private Rigidbody rb;
-	private Animation anim;
 
 	private SpriteRenderer spriteRend;
 
@@ -33,12 +32,16 @@ public class Player : MonoBehaviour {
 	private int currentIndex = 0;
 
 	public bool isLeft = false;
+
+	private Vector3 temp;
+
 	void Start () {
 		foreach(Sprite _sprite in spriteArray) {
 			string _spriteName = _sprite.name.Substring(8);
 			spriteDict.Add(_spriteName, _sprite);
 			Debug.Log (_spriteName+" : "+_sprite.name);
 		}
+		temp = new Vector3(attackZone.localPosition.x, attackZone.localPosition.y, attackZone.localPosition.z);
 		CR_RunningArray = new bool[] {false, false, false, false, false};
 		rb = GetComponent<Rigidbody>();
 		spriteRend = GetComponentInChildren<SpriteRenderer>();
@@ -101,11 +104,13 @@ public class Player : MonoBehaviour {
 				resetTransform ();
 				spriteRend.sprite = spriteDict ["groundPound"];
 				gameObject.BroadcastMessage ("MegaPunch");
+				temp = new Vector3(attackZone.localPosition.x, attackZone.localPosition.y, attackZone.localPosition.z);
+				attackZone.localScale = new Vector3(1.69f, 1f, 1f);
 				StartCoroutine (ReturnToIdle(new float[]{1.2f, 5.0f, 2.0f}));
 			}
 
 			if (CR_RunningArray[0] && CR_RunningArray[2] && currentIndex == 2) {
-				//attackZone.localPosition
+				attackZone.localPosition = Vector3.zero;
 			}
 
 			if (Input.GetButtonDown("Jump") && grounded && !CR_RunningArray[3] && !CR_RunningArray[0]) {
@@ -157,6 +162,8 @@ public class Player : MonoBehaviour {
 	void resetTransform () {
 		playerSprite.transform.localScale = new Vector3 (playerSprite.transform.localScale.x, 0.1081449f, playerSprite.transform.localScale.z);
 		playerSprite.transform.localPosition = Vector3.zero;
+		attackZone.localPosition = temp;
+		attackZone.localScale = new Vector3 (1f, 1f, 1f);
 	}
 
 	Vector3 CastRayToWorld() {
@@ -172,6 +179,7 @@ public class Player : MonoBehaviour {
 		CR_RunningArray[0] = true;
 		yield return new WaitForSeconds(_seconds[0]);
 		spriteRend.sprite = spriteDict["idle"];
+		attackZone.localScale = new Vector3(1f, 1f, 1f);
 		CR_RunningArray[0] = false;
 		StartCoroutine (ReturnToIdle_2 (new float[]{_seconds [1], _seconds [2]}));
 	}

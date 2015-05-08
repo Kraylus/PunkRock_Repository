@@ -59,6 +59,7 @@
 -define:UNITY_EDITOR_OSX
 -define:CROSS_PLATFORM_INPUT
 'Assets/CameraOffset.cs'
+'Assets/Enemy.cs'
 'Assets/NewBehaviourScript.cs'
 'Assets/Player.cs'
 'Assets/RespawnManager.cs'

@@ -6,12 +6,13 @@ public class DealDamage : MonoBehaviour {
 
 	public bool colliderInRange = false;
 	public Collider other;
+	public Transform attackZone;
 
-	public string selfTag = "";
+	public string selfTag;
 
 	// Use this for initialization
 	void Start () {
-
+		attackZone = GetComponent<Transform> ();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +27,13 @@ public class DealDamage : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerStay(Collider _other){
+		if (!(_other.gameObject.tag == selfTag || _other.gameObject.tag == "Ground")) {
+			colliderInRange = true;
+			other = _other;
+		}
+	}
+	
 	void OnTriggerExit() {
 		colliderInRange = false;
 		other = null;
